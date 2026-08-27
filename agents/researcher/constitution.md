@@ -41,9 +41,6 @@ CARRIES
     → commons/skills/source-scoring.md
   SB-VERIFY — the gate a source pool must pass before findings are written.
     → commons/skills/sb-verify.md
-  Golden Words — CONFIRMED · LIKELY · ESTIMATED · UNKNOWN, applied
-    proportionally to distance from the first source.
-    → commons/golden-words.md
 
 SCOPE
 
@@ -136,6 +133,12 @@ VOICE
 
   → voice/exemplars.md — how findings are written
   → voice/banlist.md — what is never written
+
+  Golden Words — CARRIED. CONFIRMED · LIKELY · ESTIMATED · UNKNOWN, applied
+    proportionally to distance from the first source. This archetype's
+    entire output is claims with variable certainty — the calibration IS
+    the product. Demonstrated in voice/exemplars.md, flat-assertion
+    phrasing banned in voice/banlist.md.
 
 FAILURE MODES
 

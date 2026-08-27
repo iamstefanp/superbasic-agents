@@ -62,6 +62,39 @@ cp -r superbasic-agents/agents/researcher/compiled ~/.claude/skills/superbasic-r
 that accepts a system prompt. It works in ChatGPT, Gemini, Cursor, and
 anything reading the Agent Skills standard.
 
+**Unattended** — an agent can also run with nobody watching: an event or a
+schedule wakes it, it works, it files the result. Any workflow engine does
+this (n8n, Make, Zapier, your own worker). See
+**[Running an Agent](docs/RUNNING-AN-AGENT.md) §5** — it changes what the
+agent has to decide in advance, and what it must be structurally incapable
+of doing.
+
+---
+
+## Build your own
+
+The ten are not the limit. The eleventh is yours.
+
+**[Creating an Agent Type](docs/CREATING-AN-AGENT-TYPE.md)** — the order to
+build in. Start with the duplicate check; most new-agent ideas turn out to be
+an existing agent wearing a hat, and finding that out costs five minutes
+instead of a week.
+
+**[constitution-template.md](templates/constitution-template.md)** — the
+blank form. Ten sections, filled in a deliberate order: Iron Law first,
+Identity last.
+
+---
+
+## Documentation
+
+| | |
+|---|---|
+| **[The Standard](docs/AGENT-STANDARD.md)** | What a SuperBasic™ Agent *is*. Constitution anatomy, file layout, compilation, trust posture. |
+| **[Running an Agent](docs/RUNNING-AN-AGENT.md)** | The four surfaces — Claude Code, claude.ai, paste-anywhere, unattended. What each gives you and what it costs. |
+| **[Creating an Agent Type](docs/CREATING-AN-AGENT-TYPE.md)** | Building an archetype that doesn't exist yet. |
+| **[Template](templates/constitution-template.md)** | The blank constitution. |
+
 ---
 
 ## What makes these different
@@ -92,6 +125,9 @@ executable "prerequisites" — that matters.
 ## Structure
 
 ```
+docs/                 the standard and how to work with it
+templates/            the blank constitution
+
 commons/              written once, carried by every agent
   principles.md         the 8 SuperBasic principles
   rpp.md                relay · plan · proof

@@ -10,9 +10,8 @@ WHY:  Ten agents, three distribution surfaces, and a market that has to trust
 WHO:  Whoever constitutes a new SuperBasic™ Agent. The agents themselves, when
       reading their own operating context. Anyone auditing what we ship.
 HOW:  Read once before building any agent. §2 is the file layout, §3 is the
-      constitution anatomy, §4 is compilation. Follow the Constitution
-      Checklist alongside it — this Standard says WHAT, the Checklist says
-      in what ORDER.
+      constitution anatomy, §4 is compilation. Follow CREATING-AN-AGENT-TYPE
+      alongside it — this Standard says WHAT, that says in what ORDER.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 1. WHAT AN AGENT IS (AND ISN'T)
@@ -71,16 +70,20 @@ IRON LAW        ONE absolute, in capitals, that this agent never violates.
                 The single strongest device observed in real packs. Not a
                 list — one. If you have three, you have none.
 
-SCOPE           In scope: what it accepts, what it produces.
-                Out of scope: at least two items, each naming the archetype
-                that owns it instead.
-
 CARRIES         The named practices this agent brings to its work — the
                 methodology it knows how to run. Each lives in skills/ (or
                 commons/skills/ when more than one archetype carries it) and
                 is invoked by METHOD, never inlined. An agent without its
                 practices has an identity and no craft: a Developer that
                 doesn't carry /sb-dev knows who it is but not how we build.
+
+SCOPE           In scope: what it accepts, what it produces.
+                Out of scope: at least two items, each naming the archetype
+                that owns it instead. Written after CARRIES because a scope
+                boundary means more once the reader knows what this agent
+                actually brings — "out of scope, that's the Strategist"
+                lands as a redirect between equipped roles, not a fence
+                around an empty one.
 
 METHOD          How it works: the named moves in order, invoking what CARRIES
                 names. Each move that needs depth points to
@@ -96,7 +99,9 @@ RATIONALIZATION The excuses this agent will invent, each paired with its
                 own excuse pre-refuted.
 
 VOICE           Points to voice/exemplars.md and voice/banlist.md. Voice is
-                carried by examples and bans, never by adjectives.
+                carried by examples and bans, never by adjectives. States
+                here whether this archetype carries Golden Words (§5) —
+                optional, and only for an archetype whose output is claims.
 
 FAILURE MODES   All five, always:
                 — Missing information → state exactly what, do not guess
@@ -153,15 +158,46 @@ plain.md (paste-anywhere):
   known to be: no progressive disclosure, no auto-trigger. A marketing
   surface, not the product.
 
+workflow (unattended):
+  The deployment target for an agent that runs with no human in session — an
+  event or schedule wakes it, it works, it files the result. Not a file in
+  compiled/ but a deployment: the prompt compiled from this constitution,
+  fetched live at run time; a named credential map; and capabilities that
+  are STRUCTURALLY ABSENT rather than forbidden — an agent that must not
+  send has no send step, not an instruction against sending.
+
+  This target is engine-agnostic. See RUNNING-AN-AGENT.md §5 for the full
+  pattern; it is not inlined here because it belongs to whoever deploys,
+  not to the archetype.
+
+  What changes in this mode: the agent cannot ask its one question, because
+  no one is there. Every judgment is pre-made or it is not made.
+
 5. WHAT MAKES IT VERIFIABLY SUPERBASIC™
 
-Four tells, all readable by an outsider:
-  — Golden Words in every claim (CONFIRMED / LIKELY / ESTIMATED / UNKNOWN).
-    An agent asserting flatly has drifted, and the drift is visible.
+Three tells, all readable by an outsider, and mandatory on every archetype:
   — RPP on every action: Relay what was understood, Plan what will be done,
     Proof after — a link, an output, a checked result. Never "done."
   — VELCRO on every document produced.
   — Asks before assuming. One question, not a list.
+
+A fourth, OPTIONAL, per archetype:
+  — Golden Words in every claim (CONFIRMED / LIKELY / ESTIMATED / UNKNOWN).
+    An agent asserting flatly has drifted, and the drift is visible — but
+    only for an agent whose output IS claims, calibration proportional to
+    distance from a checkable source. It is not a universal requirement:
+    across the ten archetypes, only the Researcher's output is fundamentally
+    claims-at-variable-distance; the others each have a more specific
+    mechanism already doing this job (a Reviewer's voice rule against
+    hedging, a Developer's gate requiring proof before "done"), and adding
+    a certainty label on top restates rather than adds. Decide per
+    archetype rather than assuming it belongs everywhere.
+
+  Where an archetype carries Golden Words, they live in VOICE — not as a
+  separate CARRIES entry, not as their own tell. Calibrated language is a
+  voice trait: voice/exemplars.md shows it in use, voice/banlist.md can ban
+  the flat-assertion phrasing it replaces. An archetype's constitution
+  decides in VOICE whether it carries this or not, and says which.
 
 Honest limit, stated rather than hidden: once distributed, these are advisory.
 In Claude Code the pack can ship hooks that enforce. Everywhere else, drift is
@@ -169,11 +205,39 @@ made VISIBLE rather than impossible. We do not claim otherwise.
 
 6. TRUST POSTURE
 
-Prose only. No scripts, no executables, no "prerequisites" to install, no
-network calls. Audited registries show 12–36% of submissions carrying
-malicious or flawed payloads, almost all delivered through executable steps —
-being structurally incapable of that attack is the point, and it is worth more
-than any badge.
+Two postures, because two different things are being trusted. Conflating them
+either weakens the public claim or makes real deployment impossible.
+
+DISTRIBUTED — what a stranger downloads:
+
+  Prose only. No scripts, no executables, no "prerequisites" to install, no
+  network calls. Audited registries show 12–36% of submissions carrying
+  malicious or flawed payloads, almost all delivered through executable steps
+  — being structurally incapable of that attack is the point, and it is worth
+  more than any badge.
+
+  This claim is absolute and does not bend. Anything shipped in this repo
+  meets it.
+
+DEPLOYED — what runs on infrastructure someone controls:
+
+  An agent doing real work holds credentials and makes network calls by
+  necessity. Pretending otherwise would mean the method stops at the
+  demonstration.
+
+  Trust here is not "incapable of acting" — it is that what it can do is
+  visible, bounded, and recorded:
+
+    — Capabilities are structural. An action the agent must not take does
+      not exist in its graph. Not forbidden; absent.
+    — Credentials are named in a map anyone can read, and the map holds no
+      secrets — only which account, which scope, which store.
+    — Every run is logged, including the runs where nothing happened. A
+      silent success and a silent failure are indistinguishable.
+
+  The distinction that matters: a distributed agent is trusted because it
+  cannot act. A deployed agent is trusted because everything it does is
+  bounded in advance and written down after.
 
 License declared in every SKILL.md frontmatter, so it survives being copied
 out of the repo. Methodology text open; the SuperBasic™ name fenced
@@ -183,7 +247,20 @@ separately (see TRADEMARK.md). Named author. Auditable in plain sight.
 VELCRO FOOTER
 
 WHEN
-  Version: 1.0 | Date: 2026-08-20
+  Version: 1.3 | Date: 2026-08-27
+  v1.0 2026-08-20 — original.
+  v1.1 2026-08-27 — §4 gains the unattended workflow target; §6 splits the
+    trust posture into DISTRIBUTED and DEPLOYED.
+  v1.2 2026-08-27 — §5's four tells become three mandatory + Golden Words
+    optional, decided per archetype in VOICE rather than assumed universal.
+    §3's VOICE row updated to match. Reason: applying the original four
+    tells to five newly-decompiled agents showed Golden Words genuinely
+    fits an evidence-producing archetype and is forced on one that isn't —
+    the compiled products themselves never used it outside the Researcher.
+  v1.3 2026-08-27 — §3's order corrected from SCOPE→CARRIES to
+    CARRIES→SCOPE, matching the Researcher — the only agent built before
+    this Standard existed. The written order was never actually followed;
+    the reference implementation was right and the spec was wrong.
 
 WHERE
   Doc Code: RS//RS//SBS#1//Agent Standard
@@ -191,14 +268,20 @@ WHERE
 
 WHICH
   Related Skills: /agent-build (the gate before any new archetype)
-  Related Documents: Research Report — Portable Agent Definitions (the
-    evidence this drafts from) · SuperBasic™ Agent Training Manual ·
-    Constitution Checklist · Foundation Pack
+  Related Documents: Creating an Agent Type (the ORDER this Standard's §3
+    is written in) · Running an Agent (the four deployment surfaces) ·
+    templates/constitution-template.md · Research Report — Portable Agent
+    Definitions (the evidence this drafts from) · SuperBasic™ Agent
+    Training Manual · Foundation Pack
+  Superseded within this repo: the Constitution Checklist (2026-07) — its
+    ordering role is now held by Creating an Agent Type, which is reachable
+    by anyone who has the repo. Resolve or retire the older document.
 
 VALID?
   Intention: Make a SuperBasic™ Agent buildable, portable, and adjustable
     without losing what makes it SuperBasic™.
-  Research: HEAVY run, 2026-08-20, ~163 verified sources.
+  Research: HEAVY run, 2026-08-20, ~163 verified sources. v1.1 amendments
+    drawn from a vendor-pattern verification run, 2026-08-27.
   Synthesis: §2–§4 from Report §7.
   Analysis: §5–§6.
   Status: MET
