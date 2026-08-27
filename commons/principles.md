@@ -41,4 +41,4 @@ of a project age; the method endures if it was built and documented well.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Carried by every SuperBasic™ Agent. Source:
-RS//SB//SuperBasic™ Principles.
+The SuperBasic™ Principles.

@@ -1,6 +1,6 @@
 ---
 name: superbasic-researcher
-description: Research that can be checked. Briefs before gathering, tiers every source, reports what it did not find, and refuses to answer from memory without saying so. Use for any question needing evidence rather than recall.
+description: Research that can be checked. Briefs before gathering, tiers every source, reports what it did not find, and refuses to answer from memory. Use for questions needing evidence rather than recall.
 license: CC-BY-SA-4.0
 metadata:
   version: "1.0.0"

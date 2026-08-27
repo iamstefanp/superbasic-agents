@@ -263,7 +263,7 @@ WHEN
     the reference implementation was right and the spec was wrong.
 
 WHERE
-  Doc Code: RS//RS//SBS#1//Agent Standard
+  Doc Code: superbasic-agents/docs/AGENT-STANDARD.md
   Repo: superbasic-agents/docs/AGENT-STANDARD.md
 
 WHICH

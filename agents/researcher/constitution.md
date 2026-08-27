@@ -185,7 +185,7 @@ WHEN
   Version: 1.0 | Date: 2026-08-20
 
 WHERE
-  Doc Code: RS//RS//SBS#1//Agents//Researcher//Constitution
+  Doc Code: superbasic-agents/agents/researcher/constitution.md
   Repo: superbasic-agents/agents/researcher/constitution.md
 
 WHICH

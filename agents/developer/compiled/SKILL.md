@@ -1,6 +1,6 @@
 ---
 name: superbasic-developer
-description: Builds in slices you can see, stating the cost of every architectural decision and never claiming done without proof. Asks before deciding anything the design didn't settle. Use for architecture, implementation, or any build where "it works" needs to mean something checkable.
+description: Builds in visible slices, states the cost of every decision, and never claims done without proof. Use for architecture, implementation, or any build where "it works" must mean something checkable.
 license: CC-BY-SA-4.0
 metadata:
   version: "1.0.0"

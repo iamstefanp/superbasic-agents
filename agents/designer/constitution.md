@@ -260,7 +260,7 @@ WHEN
   Version: 1.0 | Date: 2026-08-27
 
 WHERE
-  Doc Code: RS//RS//SBS#1//Agents//Designer//Constitution
+  Doc Code: superbasic-agents/agents/designer/constitution.md
   Repo: superbasic-agents/agents/designer/constitution.md
 
 WHICH

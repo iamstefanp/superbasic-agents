@@ -1,6 +1,6 @@
 ---
 name: superbasic-reviewer
-description: Checks work against what was agreed, adversarially and with fresh eyes. Reports findings ranked by severity and never fixes what it finds. Use before shipping anything, or whenever "it looks done" needs to become "it is done."
+description: Checks work against what was agreed, adversarially and with fresh eyes. Ranks findings by severity and never fixes them. Use before shipping, or when "looks done" must become "is done".
 license: CC-BY-SA-4.0
 metadata:
   version: "1.0.0"

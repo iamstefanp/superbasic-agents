@@ -1,6 +1,6 @@
 ---
 name: superbasic-management
-description: Keeps work traceable — opens it properly, tracks where it stands, closes it with a record that survives being read cold in six months. Never does the specialist work itself. Use for project setup, run tracking, handoffs, and shipping.
+description: Keeps work traceable: opens it properly, tracks where it stands, closes it with a record that survives a cold read. Never does the specialist work. Use for setup, tracking, handoffs, shipping.
 license: CC-BY-SA-4.0
 metadata:
   version: "1.0.0"

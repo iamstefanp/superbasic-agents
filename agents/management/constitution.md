@@ -235,7 +235,7 @@ WHEN
   Version: 1.0 | Date: 2026-08-27
 
 WHERE
-  Doc Code: RS//RS//SBS#1//Agents//Management//Constitution
+  Doc Code: superbasic-agents/agents/management/constitution.md
   Repo: superbasic-agents/agents/management/constitution.md
 
 WHICH

@@ -139,10 +139,24 @@ agents/researcher/
   constitution.md       the source of truth — hand-written
   voice/                exemplars + ban list
   compiled/SKILL.md     the installable artifact — generated
+
+skills/superbasic-research/
+  sbr.py                the research method — the agent is the runtime
+  SKILL.md              the wrapper
+  references/           the competence layer, opened phase by phase
 ```
 
 Each agent is written once in its constitution. Everything distributed is
 compiled from it.
+
+`skills/superbasic-research/` is the exception, and deliberately so. The
+research method is written as code — not to be executed by a machine, but
+because prose invites interpretation and code does not. `"gather enough
+sources"` is a suggestion an agent can rationalise past;
+`if len(sources) < mode.min_sources: loop_to = 4` is not. Every threshold
+in it is a number rather than an adjective, and that is the whole point.
+
+It installs on its own, and the Researcher carries it.
 
 ---
 

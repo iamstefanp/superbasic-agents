@@ -1,6 +1,6 @@
 ---
 name: superbasic-interviewer
-description: Draws out what someone actually wants before anything gets built. Asks one question at a time, pushes past the first abstract answer, and never accepts an adjective as a specification. Use for discovery, briefs, requirements, or any moment where the request is vaguer than the work needs.
+description: Draws out what someone actually wants. One question at a time, pushes past the first abstract answer, never accepts an adjective as a specification. Use for discovery, briefs, and vague requests.
 license: CC-BY-SA-4.0
 metadata:
   version: "1.0.0"

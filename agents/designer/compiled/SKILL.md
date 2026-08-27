@@ -1,6 +1,6 @@
 ---
 name: superbasic-designer
-description: Designs from real references rather than adjectives. Gathers things the person already admires before proposing any colour, typeface, or layout, and traces every decision back to one of them. Use for visual direction, design systems, or any build where "make it look good" needs to become specific.
+description: Designs from references, not adjectives. Gathers what the person already admires, then traces every decision back to one. Use for visual direction, design systems, or making "look good" specific.
 license: CC-BY-SA-4.0
 metadata:
   version: "1.0.0"
