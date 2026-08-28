@@ -136,6 +136,14 @@ SCORE_FLOOR_BAND = "BRONZE"
 PASSING_BANDS = ("GOLD", "SILVER", "BRONZE")
 
 
+def dimension_names(mode: str) -> list:
+    """The dimension names a source must be scored on, for this mode."""
+    names = [d[0] for d in SCORING_DIMENSIONS["LIGHT"]]
+    if mode == "HEAVY":
+        names += [d[0] for d in SCORING_DIMENSIONS["HEAVY_ADDITIONAL"]]
+    return names
+
+
 def band_for(score: int, mode: str) -> str:
     """Return the band name for a raw score in this mode."""
     for band, (low, high) in SCORING_BANDS[mode].items():
@@ -222,6 +230,26 @@ CANONICAL_SOURCE_TYPES = [
 #
 # A press release IS canonical on one thing only: that the organisation
 # said this, on this date. It is not canonical on whether it is true.
+
+
+# ─────────────────────────────────────────────────────────
+# PERSONA TAXONOMY
+# ─────────────────────────────────────────────────────────
+# The twelve personas from references/source-personas.md, named here so
+# the gates can check membership rather than trust the label. Full
+# definitions live in the reference file; this list exists only so that
+# "2 distinct personas" (gate_check DIVERSITY) cannot be satisfied by two
+# invented labels that were never checked against the taxonomy — a lazy
+# pass on a check the method exists to make hard to fake.
+
+PERSONA_TAXONOMY = [
+    "Primary Artifact", "Independent Observer", "Promotional Insider",
+    "Captured Expert", "Leaked Document", "Academic Authority",
+    "Well-Meaning Generalist", "Anonymous Insider", "Tertiary Compiler",
+    "Promotional Authority", "Direct Witness", "Regulatory Authority",
+]
+
+MEDIA_MODES = ["Paid", "Owned", "Earned"]
 
 
 # ─────────────────────────────────────────────────────────
@@ -523,8 +551,10 @@ You go and get it. This is the only phase that searches.
 1. Execute every query from the Plan. Every one. A query skipped is a
    gap you will not know you have.
 2. For each result record: Source Name · URL · Publication Date ·
-   Accessed Date · Persona · Key Facts · Confidence.
-   Tag persona from references/source-personas.md.
+   Accessed Date · Persona · Media Mode · Key Facts · Confidence.
+   Tag persona from references/source-personas.md's twelve named personas
+   — exactly one of them, not a paraphrase. Tag media mode as Paid, Owned
+   or Earned. A gate at CHECK will reject a tag that isn't one of these.
 3. Capture, do not analyse. Interpretation is Phase 7's job. Analysing
    now means you stop looking once you have a story.
 4. Log every attempt, including the ones that found nothing. A search
@@ -560,7 +590,8 @@ is UNKNOWN. A plausible fabrication is the worst possible output — it is
 indistinguishable from good work until someone acts on it.
         """,
         "doc_schema": [
-            "Intel Items — source · URL · published · accessed · persona · "
+            "Intel Items — source · URL · published · accessed · persona "
+            "(one of the twelve) · media mode (Paid/Owned/Earned) · "
             "facts · confidence (repeat per find)",
             "Failed Retrievals — what would not open, and what you did",
             "Anomalies — findings that contradict the emerging picture",
@@ -618,13 +649,19 @@ earns trust.
 
 1. Score every source. Open references/source-scoring.md for the rubric.
    LIGHT: six dimensions, out of 30. HEAVY: eight, out of 40.
-   Record every dimension, not just the total.
+   Record every dimension by name, not just the total — the gate below
+   checks that the dimensions are all present and actually sum to the
+   total you report. A total with no shown working fails.
    Anything below BRONZE leaves the evidence pool.
 2. Test independence properly. Open references/independence-test.md.
    Follow each source back toward its origin. Sources sharing an origin
    collapse into one, and you recount after collapsing (Law 4). This is
    the check most often skipped and the one that most often turns a
-   confident report into a wrong one.
+   confident report into a wrong one. For every source, write one line
+   (`origin_trace`) stating either that it IS the origin — a first
+   mention, not a report of one — or naming what you traced it to and how.
+   Setting `origin` without `origin_trace` is the domain-counting shortcut
+   this step exists to prevent, and the gate below rejects it.
 3. Assign confidence to every claim. CONFIRMED needs genuine independent
    corroboration at the mode's threshold — name the sources.
 4. Reconcile anomalies. Where sources disagree, record both versions and
@@ -636,9 +673,11 @@ earns trust.
 Then run the exit gate below. It can fail, and that is the point.
         """,
         "doc_schema": [
-            "Scored Source Table — source · every dimension · total · band",
-            "Independence Map — which sources share an origin, and the "
-            "recount after collapsing",
+            "Scored Source Table — source · every dimension named and "
+            "scored · total (must equal the sum of the dimensions) · band",
+            "Independence Map — origin and origin_trace per source (how "
+            "each was actually traced, or why it IS the origin), which "
+            "sources share an origin, and the recount after collapsing",
             "Claim Table — claim · sources · confidence",
             "Contradictions — claim, both versions, decision taken",
             "Assumptions — what is being taken on trust",
@@ -828,12 +867,36 @@ def gate_check(pool: list, krq_clusters: list, mode: str) -> tuple:
     if missing:
         failures.append(f"COVERAGE — no findings at all for: {', '.join(missing)}")
 
-    personas = {s.get("persona") for s in usable if s.get("persona")}
+    # Persona must be drawn from the twelve in references/source-personas.md
+    # (Law 2's spirit applied to tagging: a tag that was never checked
+    # against the taxonomy is not a tag, it is a guess wearing one). An
+    # invented or off-taxonomy label fails outright rather than silently
+    # not counting toward diversity — two fabricated "distinct" labels
+    # must not be able to pass this check.
+    off_taxonomy = [s for s in usable
+                    if s.get("persona") and s["persona"] not in PERSONA_TAXONOMY]
+    if off_taxonomy:
+        failures.append(
+            f"PERSONA TAXONOMY — {len(off_taxonomy)} source(s) tagged with "
+            f"a persona not in references/source-personas.md's twelve: " +
+            "; ".join(sorted({s['persona'] for s in off_taxonomy})))
+
+    personas = {s.get("persona") for s in usable
+                if s.get("persona") in PERSONA_TAXONOMY}
     if len(personas) < 2:
         failures.append(
             f"DIVERSITY — {len(personas)} persona(s) present, 2 required")
 
-    modes_present = {s.get("media_mode") for s in usable if s.get("media_mode")}
+    off_media = [s for s in usable
+                 if s.get("media_mode") and s["media_mode"] not in MEDIA_MODES]
+    if off_media:
+        failures.append(
+            f"MEDIA MODE — {len(off_media)} source(s) tagged with a mode "
+            f"outside Paid/Owned/Earned: " +
+            "; ".join(sorted({s['media_mode'] for s in off_media})))
+
+    modes_present = {s.get("media_mode") for s in usable
+                     if s.get("media_mode") in MEDIA_MODES}
     if len(modes_present) < 2:
         failures.append(
             f"DIVERSITY — {len(modes_present)} media mode(s), 2 required")
@@ -858,6 +921,28 @@ def gate_verify(pool: list, claims: list, mode: str) -> tuple:
     if len(scored) != len(pool):
         failures.append("SCORE — not every source carries a score (Law 2)")
 
+    # A total with no per-dimension breakdown is a guess wearing a number.
+    # references/source-scoring.md's job docstring already says "record
+    # every dimension, not just the total" — this is that instruction
+    # enforced rather than requested. A source must carry a `dimensions`
+    # dict with exactly this mode's dimension names, and the total must
+    # actually be their sum — not a number chosen first and reverse-fitted.
+    required_dims = set(dimension_names(mode))
+    dim_failures = []
+    for s in pool:
+        dims = s.get("dimensions")
+        if not isinstance(dims, dict) or set(dims) != required_dims:
+            dim_failures.append(s.get("id", "?"))
+            continue
+        if sum(dims.values()) != s.get("score"):
+            dim_failures.append(s.get("id", "?"))
+    if dim_failures:
+        failures.append(
+            f"SCORE BREAKDOWN — {len(dim_failures)} source(s) missing a "
+            f"per-dimension score, missing a required dimension, or whose "
+            f"total does not match the sum of its dimensions: " +
+            ", ".join(str(x) for x in dim_failures))
+
     usable = [s for s in pool if clears_floor(s.get("score", 0), mode)]
 
     if len(usable) < spec["min_sources"]:
@@ -877,6 +962,24 @@ def gate_verify(pool: list, claims: list, mode: str) -> tuple:
             f"POOL INDEPENDENCE — {len(usable)} sources collapse to "
             f"{len(origins)} origin; the pool is one source wearing "
             f"{len(usable)} hats (Law 4)")
+
+    # ORIGIN TRACING — references/independence-test.md exists because
+    # "count distinct domain names and call that independence" is the
+    # single most common way this method gets faked. Domain-counting sets
+    # `origin` to the source's own id for everything and calls it done.
+    # Require the opposite of silence: any source claiming to BE its own
+    # origin (a first-mention, not a report of one) must say so and give
+    # one line of why; any source pointing at another origin must name a
+    # trace, not just a label. Neither is provable from here — this cannot
+    # verify the tracing was done well, only that it was not skipped.
+    untraced = [s for s in usable if not s.get("origin_trace")]
+    if untraced:
+        failures.append(
+            f"ORIGIN TRACING — {len(untraced)} source(s) carry an `origin` "
+            f"with no `origin_trace` explaining how it was established "
+            f"(independence-test.md, Law 4) — a bare origin label is "
+            f"exactly the domain-counting shortcut this check exists to "
+            f"catch: " + ", ".join(str(s.get("id", "?")) for s in untraced))
 
     unsourced = [c for c in claims if not c.get("sources")]
     if unsourced:
