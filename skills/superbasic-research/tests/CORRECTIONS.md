@@ -215,3 +215,98 @@ honest, thorough search happens to surface first — that is what LIGHT
 mode's source floor is for, not a defect to keep chasing. Logged as a
 documented property of the method for the Findings Memo, not carried
 forward as an open action item.
+
+## 2026-08-28 — F-T2 declared PARTIAL against sbr.py's own literal rule
+
+**Forced by:** F-T2 (wave 2, HEAVY, ownership/status of Lukoil Neftohim
+Burgas). Every CHECK/VERIFY check passed on the first pass, 0/2 loops
+used at both gates. `sbr.py` states PARTIAL fires "iff a loop cap was
+exhausted." This run had no exhausted loop — by the mechanical rule it
+should have been COMPLETE. The agent declared PARTIAL anyway, in its own
+words: *"a technically-passing run that leaves its own stated canonical
+targets unretrieved... is exactly the kind of complete-looking report
+the method warns against."*
+
+**Bin:** A (agent deviation from a clearly-stated rule), not a method
+bug. `sbr.py`'s status rule is not ambiguous here — the agent overrode
+it deliberately, on its own judgment, and said so honestly rather than
+hiding it.
+
+**Decision (Stefan, 2026-08-28): the rule stays strict.** This run
+should have said COMPLETE, with the retrieval gaps carried in the
+Report's Assumptions and Limitations section — which F-T2 already had,
+in full, disclosing exactly what was unretrieved and why. PARTIAL is
+reserved for the mechanical condition `sbr.py` defines; letting agents
+use it for "I feel this isn't thorough enough" would make the status
+line mean two different things depending on which agent wrote it, which
+defeats the purpose of having a status line at all. The honest-disclosure
+instinct behind the deviation was right; the label chosen for it was
+wrong.
+
+**No sbr.py change.** Logged as a judge-rubric note for RUBRIC.md's
+Layer 2 grading: an agent that mislabels COMPLETE-with-caveats as
+PARTIAL should be marked down on status accuracy, the same as an agent
+that mislabels PARTIAL as COMPLETE — the direction of the error doesn't
+exempt it from scrutiny. Both are the status line failing to mean what
+it says, and both erode the one thing a reader is supposed to be able
+to trust it for at a glance.
+
+## 2026-08-28 — REPORT split into two parts, after two independent cold-reader runs
+
+**Forced by:** M-T2's cold-reader protocol (BATTERY.md), run twice — the
+second time with a reader that actually had WebFetch and fact-checked a
+claim for real, ruling out "the reader just couldn't verify anything."
+Both readers, independently, unprompted, named the same specific
+friction. Reader 1: *"the confidence-tagging... and the closing
+Confidence summary tally read like they're satisfying some internal
+audit checklist more than answering my question... I had to read past
+the scaffolding to get to the actual advice."* Reader 2, separately:
+*"The confidence tags... and the tally line... read like scorekeeping
+for whoever built this process, not something I as a venue owner
+need... that's an internal grading rubric bleeding into my report."*
+Both readers still got the right answer, could act on it, and said the
+underlying caution made them trust the answer *more* — the complaint was
+presentation, not substance or accuracy.
+
+**Bin:** B (method bug) — but a narrow one. REPORT's job description
+already produced good plain-prose sections (Answer, "what I'd do") that
+neither reader complained about; the friction was specifically the
+inline confidence tags on nearly every sentence and the Band/Persona
+audit table sitting inline with the answer rather than clearly
+demarcated as a separate reference layer.
+
+**What changed:** Phase 8's job text and doc_schema now require two
+explicit, separated parts. **Part One — For The Reader**: plain prose,
+no inline tags, no bands, no personas, no tally; confidence expressed in
+words ("well-supported, but I couldn't independently confirm it")
+instead of a bracketed label. PARTIAL status, if applicable, is stated
+here too in plain words, not only in Part Two's status line — a reader
+who stops after Part One must still learn the run didn't fully resolve.
+**Part Two — The Record**: headed explicitly as the audit trail, not
+required reading — claim table, sources with band/persona, confidence
+tally, assumptions. Nothing is removed. No verifiability is lost. The
+full apparatus every other card in this battery depended on to be
+gradeable at all is still there — it just isn't the first thing, or
+every sentence, a reader has to get past.
+
+**Which Law's purpose it serves:** none of the ten directly, and that is
+worth naming — this is the Humanist chair's mandate operating on its
+own terms, not a Law-compliance fix. The council's own words apply
+directly: *"This method can pass every check while producing armored
+prose... that no one reads and no one acts on."*
+
+**Falsifiable prediction:** a third cold-reader run against a report
+produced under the split format should not surface the Q5 canary in the
+same form — if a reader still says the apparatus is doing work for the
+method rather than for them, the split didn't fix what it was meant to
+fix, and the next move is not a third patch but reconsidering whether
+the audit layer belongs in the same document at all.
+
+**Ratified by:** not yet — same pending fresh-session read-back as the
+other 2026-08-28 entries in this log.
+**Regression re-run:** pending — the next HEAVY or LIGHT card run should
+produce a Part One/Part Two report and be checked against `check_run.py`
+(the status detector and document-count checks were verified to still
+work against the new structure without needing their own changes — the
+split is internal to one document, not a new document) and, ideally, a
+third cold-reader pass to test the falsifiable prediction above.

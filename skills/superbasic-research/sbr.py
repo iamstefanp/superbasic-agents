@@ -690,30 +690,58 @@ how this reads. It does not change what is claimed.
         "role": "Output Architect",
         "job": """
 You produce the deliverable. It must stand alone — read by someone with
-no memory of this run.
+no memory of this run. It is read by two different people at once: one
+who wants the answer, and one who needs to check your work. Write for
+both, in that order, in two clearly separated parts. Do not interleave
+them — cold readers of earlier reports named this exact friction:
+confidence tags on every sentence and a Band/Persona table sitting where
+the answer should be read as "performing rigor for an audience other
+than me." The rigor is not optional. Where it lives on the page is.
 
+PART ONE — FOR THE READER. Plain prose. No inline confidence tags, no
+bands, no personas, no tally. Confidence still matters, but say it in
+words a person would actually say out loud — "well-supported, but I
+couldn't independently confirm it" rather than "*Confidence: LIKELY*."
 1. Answer the research question directly, in the first paragraph.
-2. Every factual claim carries its confidence (Law 6).
-3. Sources block: every source with URL, date, band and persona.
-4. State what you searched for and did not find (Law 5). If genuinely
-   nothing, say "nothing" — do not omit the section.
-5. Disclose the gate result. If any gate failed and the run proceeded on
-   maximum loops, this report is PARTIAL and must say so at the top.
-6. Confidence summary: how many claims at each level.
+2. Key findings, each explained in a sentence a non-expert would
+   understand, confidence woven into the sentence rather than tagged
+   onto it.
+3. What's genuinely not known — the gaps that matter to a decision,
+   plainly stated.
+4. What you'd actually do with this, if it were your decision.
+If any gate failed and the run proceeded on maximum loops, PARTIAL is
+stated here too, in the first paragraph, in plain words — not only in
+Part Two's status line. A reader who stops after Part One must still
+learn the run didn't fully resolve.
+
+PART TWO — THE RECORD. Headed clearly as the audit trail, not required
+reading. Everything Part One asserts must be traceable here.
+1. Status — COMPLETE or PARTIAL, and which gate failed if PARTIAL.
+2. Claim table — every claim, its sources, its confidence label.
+3. Sources — name, URL, date, band, persona.
+4. Searched And Not Found (Law 5) — full list, "nothing" if genuinely
+   nothing, section never omitted.
+5. Confidence summary — count per label.
+6. Assumptions and Limitations.
 
 A complete-looking report that failed a gate silently is the thing this
-method exists to prevent.
+method exists to prevent. So is a report so armored in its own apparatus
+that the person it was written for has to dig for the answer.
         """,
         "doc_schema": [
-            "Status — COMPLETE or PARTIAL (and which gate failed)",
-            "Answer — the research question, answered, first",
-            "Key Findings — each with confidence",
-            "Evidence — claim table",
-            "Hypothesis Final State",
-            "Searched And Not Found",
-            "Sources — name · URL · date · band · persona",
-            "Confidence Summary — n CONFIRMED / LIKELY / ESTIMATED / UNKNOWN",
-            "Assumptions and Limitations",
+            "PART ONE — FOR THE READER",
+            "  Answer — the research question, answered, first, plain prose",
+            "  Key Findings — plain sentences, confidence woven in, not tagged",
+            "  What's Not Known — the gaps that matter to a decision",
+            "  What I'd Do — a direct recommendation",
+            "PART TWO — THE RECORD",
+            "  Status — COMPLETE or PARTIAL (and which gate failed)",
+            "  Claim Table — claim · sources · confidence",
+            "  Hypothesis Final State",
+            "  Sources — name · URL · date · band · persona",
+            "  Searched And Not Found",
+            "  Confidence Summary — n CONFIRMED / LIKELY / ESTIMATED / UNKNOWN",
+            "  Assumptions and Limitations",
         ],
     },
 }
