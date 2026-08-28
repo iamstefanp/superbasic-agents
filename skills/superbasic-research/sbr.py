@@ -491,7 +491,16 @@ You sequence the work. Scope said where; you say in what order.
 3. Trip plan: map each query to its KRQ. Any KRQ with no query is a
    cluster you are about to fail.
 4. Priority order: most time-constrained first; primary before commentary.
-5. Contingency: for each critical source, what is the fallback if it is
+5. Canonical check, per KRQ cluster: could a canonical document plausibly
+   answer this one (a statute, a filing, a judgment, a standard, audited
+   accounts — see CANONICAL SOURCES)? If yes, name it and make retrieving
+   it the first query for that cluster, not a stretch goal. Two agents
+   given the identical brief will drift onto different secondary sources
+   for the same cluster — that is not a failure, it is what open search
+   does — but they will converge on the same primary document if both
+   actually go looking for it. This is the difference between a cluster
+   that is merely COVERED and one that is covered *reliably*.
+6. Contingency: for each critical source, what is the fallback if it is
    unavailable or paywalled?
         """,
         "doc_schema": [
@@ -499,6 +508,8 @@ You sequence the work. Scope said where; you say in what order.
             "Search Queries — 5–10, each with its KRQ target",
             "Trip Plan — query to KRQ map",
             "Priority Order",
+            "Canonical Check — per KRQ: does one plausibly exist, and is "
+            "retrieving it queried for first",
             "Contingencies",
         ],
     },
@@ -521,7 +532,11 @@ You go and get it. This is the only phase that searches.
 5. Flag anomalies — anything contradicting the emerging picture. Do not
    average it away. Do not quietly drop it.
 6. Coverage check: does every KRQ cluster have at least one finding?
-   Name the ones that do not.
+   Name the ones that do not. Where PLAN flagged a canonical document for
+   this cluster, record whether you actually retrieved it — a cluster
+   covered only by secondary description, when a primary was named and
+   available, is a weaker finding than the schema's PASS/FAIL alone shows.
+   Say so here rather than letting it surface as a surprise at VERIFY.
 
 A source you could not open is not a source. Record the failure; do not
 substitute something else and move on.
@@ -549,7 +564,8 @@ indistinguishable from good work until someone acts on it.
             "facts · confidence (repeat per find)",
             "Failed Retrievals — what would not open, and what you did",
             "Anomalies — findings that contradict the emerging picture",
-            "KRQ Coverage — per cluster: COVERED or GAP",
+            "KRQ Coverage — per cluster: COVERED or GAP, and CANONICAL or "
+            "SECONDARY where PLAN flagged a canonical document for it",
             "Searched And Not Found — explicit list (Law 5)",
         ],
     },

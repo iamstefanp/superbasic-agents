@@ -130,3 +130,58 @@ pre-battery stranger-test outputs re-checked (6/6, unchanged) and all six
 wave-1 outputs re-checked (6/6 across the board, up from 4/6 and 5/6 on
 the two M-T1 runs pre-fix). Documented here as a claim I made and then
 immediately verified, not a claim awaiting later confirmation.
+
+## 2026-08-28 — PLAN gets a per-KRQ canonical check; CHECK records it
+
+**Forced by:** M-T1 (both replication runs). Per BATTERY.md's own criteria
+this is an outright FAIL — CONFIRMED-claim overlap well under the 60%
+floor — though with no CONFIRMED-vs-contradicted flip anywhere.
+**Bin:** B (method bug — a real gap, investigated rather than assumed).
+
+**What was actually found, before drafting anything:** the naive read
+("the method is non-reproducible") was wrong. The one place the two runs
+gave genuinely different confidence to the SAME headline claim
+("commercial has no separate legal track") is because run 2 retrieved the
+regulation's own text and got an explicit answer, while run 1 never
+reached that text and had to infer — the confidence gap tracks a real
+difference in evidence quality, which is the method doing its job, not
+failing at it. The real, fixable pattern was different: **which specific
+canonical document an agent happens to find is arbitrary per KRQ
+cluster.** Run 1 retrieved §21h and §44 LuftVO; run 2 retrieved §37
+LuftVG and the EU regulation text directly — genuinely different,
+genuinely valid, and non-overlapping. `CHECK`'s COVERAGE test only asks
+whether a cluster has *a* finding, never whether the agent actually tried
+for the primary document once one plausibly existed.
+
+**What changed:**
+- `PLAN`'s job text gained a 6th instruction: for each KRQ, ask whether a
+  canonical document plausibly answers it, name it if so, and make
+  retrieving it the first query for that cluster — framed explicitly as
+  the reason two agents will still drift onto different secondary
+  sources (that's fine, that's open search) but should converge on the
+  same primary if both actually go looking for it.
+- `PLAN`'s doc_schema gained a "Canonical Check" line.
+- `INTEL`'s coverage-check instruction and doc_schema now ask the agent
+  to record CANONICAL vs SECONDARY per cluster where one was flagged,
+  not just COVERED/GAP.
+- No new phase, no new document, no new hard gate — deliberately, per
+  the anti-ratchet rule. This is a sharpening of two phases' existing
+  instructions, not new apparatus.
+
+**Which Law's purpose it serves:** Law 8 (phases run in order and their
+purpose should be reliable) and, indirectly, Law 4/independence — a
+cluster resting on one un-pursued canonical source is exactly the kind of
+avoidable single-origin dependency the independence test exists to catch
+downstream; catching it earlier, at PLAN, is cheaper than catching it at
+VERIFY.
+
+**Falsifiable prediction:** a third M-T1 execution, on this corrected
+`sbr.py`, should show higher CONFIRMED-claim overlap with at least one of
+the two prior runs than those two runs showed each other — specifically,
+it should independently retrieve §21h LuftVO, §37 LuftVG, §44 LuftVO, and
+the EU regulation text directly, rather than a subset.
+
+**Ratified by:** not yet — third item pending the same fresh-session
+read-back as the two prior 2026-08-28 entries.
+**Regression re-run:** pending — a third M-T1 execution is being run now
+specifically to test this prediction.
