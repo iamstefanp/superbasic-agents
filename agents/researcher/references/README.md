@@ -1,8 +1,9 @@
 # References
 
-The Researcher's reference layer lives with the method it serves:
+The Researcher's reference layer lives with the method it serves, in its
+own repo — [github.com/iamstefanp/superbasic-research](https://github.com/iamstefanp/superbasic-research):
 
-    skills/superbasic-research/references/
+    references/
 
     decay-classes.md      how old is too old, by subject tempo
     media-index.md        98 source types, Paid / Owned / Earned
@@ -13,4 +14,4 @@ The Researcher's reference layer lives with the method it serves:
 They are not duplicated here. One copy, one truth — a reference that
 disagrees with itself is worse than no reference.
 
-The method those files serve is `skills/superbasic-research/sbr.py`.
+The method those files serve is `sbr.py`, in that same repo.

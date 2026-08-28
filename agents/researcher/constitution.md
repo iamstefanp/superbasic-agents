@@ -189,10 +189,12 @@ WHERE
   Repo: superbasic-agents/agents/researcher/constitution.md
 
 WHICH
-  Related Documents (all present in this repo): SuperBasic™ Agent Standard
-    v1.0 · skills/superbasic-research/ (sbr.py, the runnable SB Research
-    method, and its references/ standards — the operational form of what
-    this constitution describes).
+  Related Documents: SuperBasic™ Agent Standard v1.0 (present in this
+    repo) · github.com/iamstefanp/superbasic-research (sbr.py, the
+    runnable SB Research method, and its references/ standards — the
+    operational form of what this constitution describes. A separate
+    repo, deliberately: the method stands on its own and this agent is
+    one of several ways to run it).
   Compiles to: compiled/SKILL.md · compiled/subagent.md · compiled/plain.md
 
 VALID?
