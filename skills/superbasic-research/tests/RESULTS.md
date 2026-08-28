@@ -21,7 +21,7 @@ evidence):
 
 | Date | Card | Mode | SHA | Verdict | Gates | Scores | Notes / linked corrections |
 |---|---|---|---|---|---|---|---|
-| — | — | — | — | — | — | — | *(empty — populates as the battery executes)* |
+| 2026-08-28 | M-T2 (shakedown) | HEAVY | f16ecb1 | **UNSCORED — shakedown** | CHECK PASS (first pass), VERIFY PASS (first pass), 0 loops | not graded | First-ever HEAVY execution. Found 1 method bug (fixed, see CORRECTIONS.md 2026-08-28), 1 agent-discipline lapse (skipped opening a required reference), 1 design question deferred pending reader evidence. **Loop machinery entirely untested — biggest open risk heading into wave 2.** Full transcript not preserved in repo; findings captured in CORRECTIONS.md. |
 
 ---
 

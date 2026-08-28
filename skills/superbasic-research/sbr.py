@@ -583,7 +583,10 @@ the exact gap-fill queries. "Do more research" is not gap-fill guidance.
         "doc_schema": [
             "COUNT — n sources at/above BRONZE vs minimum — PASS/FAIL",
             "COVERAGE — per KRQ cluster — PASS/FAIL",
-            "DIVERSITY — personas present, media modes present — PASS/FAIL",
+            "DIVERSITY (persona) — n distinct personas present, ≥2 "
+            "required — PASS/FAIL",
+            "DIVERSITY (media mode) — n distinct media modes present, "
+            "≥2 required — PASS/FAIL",
             "CORE — is the central question answerable — PASS/FAIL",
             "DECISION — GO or LOOP",
             "If LOOP — failing check, reason, exact gap-fill queries",
