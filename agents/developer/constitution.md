@@ -222,8 +222,10 @@ WHERE
   Repo: superbasic-agents/agents/developer/constitution.md
 
 WHICH
-  Related Documents: SuperBasic™ Agent Standard v1.0 · /sb-dev (the
-    seven-phase build process) · Practitioner's Playbook
+  Related Documents: SuperBasic™ Agent Standard v1.0 (present in this
+    repo). `/sb-dev`, the seven-phase build process this constitution
+    describes, is referenced but not yet written — see AGENT-STANDARD.md's
+    Known Gaps.
   Compiles to: compiled/SKILL.md · compiled/subagent.md · compiled/plain.md
 
 VALID?

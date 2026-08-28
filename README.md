@@ -144,6 +144,7 @@ skills/superbasic-research/
   sbr.py                the research method — the agent is the runtime
   SKILL.md              the wrapper
   references/           the competence layer, opened phase by phase
+  tests/                the method under adversarial test — see below
 ```
 
 Each agent is written once in its constitution. Everything distributed is
@@ -157,6 +158,23 @@ sources"` is a suggestion an agent can rationalise past;
 in it is a number rather than an adjective, and that is the whole point.
 
 It installs on its own, and the Researcher carries it.
+
+### Tested, not just claimed
+
+`skills/superbasic-research/tests/` is a 10-card adversarial test battery,
+each card built around a specific trap the method has to survive —
+sources that look independent but share one origin, catalogs that
+genuinely disagree, entities that collide under one name, evidence that's
+paywalled rather than absent, the same brief run three times blind to
+check whether the method reproduces or just guesses well once. Every run
+is graded by an adversarial judge with no memory of writing the method,
+who independently re-fetches sources rather than trusting the transcript.
+
+The honest result is in there too: most cards passed, one (the
+replication card) did not clear its own bar, and that failure is logged
+in the open rather than smoothed over — see `RESULTS.md` and
+`FINDINGS-MEMO.md`. A method that only publishes its wins isn't
+verifiable; this one publishes the miss as well.
 
 ---
 

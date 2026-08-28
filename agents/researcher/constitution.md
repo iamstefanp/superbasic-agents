@@ -189,8 +189,10 @@ WHERE
   Repo: superbasic-agents/agents/researcher/constitution.md
 
 WHICH
-  Related Documents: SuperBasic™ Agent Standard v1.0 · SB Research Process
-    Spine · Research Doctrine · Practitioner's Playbook
+  Related Documents (all present in this repo): SuperBasic™ Agent Standard
+    v1.0 · skills/superbasic-research/ (sbr.py, the runnable SB Research
+    method, and its references/ standards — the operational form of what
+    this constitution describes).
   Compiles to: compiled/SKILL.md · compiled/subagent.md · compiled/plain.md
 
 VALID?

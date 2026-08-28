@@ -12,6 +12,13 @@ WHO:  Whoever constitutes a new SuperBasic™ Agent. The agents themselves, when
 HOW:  Read once before building any agent. §2 is the file layout, §3 is the
       constitution anatomy, §4 is compilation. Follow CREATING-AN-AGENT-TYPE
       alongside it — this Standard says WHAT, that says in what ORDER.
+KNOWN GAPS: this Standard and several constitutions describe the
+      Developer's `/sb-dev` build practice as real and load-bearing (§3
+      roster below, `agents/developer/skills/sb-dev.md`) — that file has
+      not been written yet. Treat every reference to it in this repo as
+      designed-but-not-shipped until it exists. Every `voice/` directory
+      except the Researcher's is likewise empty — no exemplars or banlist
+      written for the other five archetypes yet.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 1. WHAT AN AGENT IS (AND ISN'T)
@@ -267,15 +274,12 @@ WHERE
   Repo: superbasic-agents/docs/AGENT-STANDARD.md
 
 WHICH
-  Related Skills: /agent-build (the gate before any new archetype)
-  Related Documents: Creating an Agent Type (the ORDER this Standard's §3
-    is written in) · Running an Agent (the four deployment surfaces) ·
-    templates/constitution-template.md · Research Report — Portable Agent
-    Definitions (the evidence this drafts from) · SuperBasic™ Agent
-    Training Manual · Foundation Pack
-  Superseded within this repo: the Constitution Checklist (2026-07) — its
-    ordering role is now held by Creating an Agent Type, which is reachable
-    by anyone who has the repo. Resolve or retire the older document.
+  Related Documents (all present in this repo): Creating an Agent Type
+    (the ORDER this Standard's §3 is written in) · Running an Agent (the
+    four deployment surfaces) · templates/constitution-template.md.
+  Drafted from a HEAVY research run into vendor agent-definition patterns
+    (~163 verified sources, 2026-08-20) — the run itself is not published
+    here; this Standard is the distilled product of it.
 
 VALID?
   Intention: Make a SuperBasic™ Agent buildable, portable, and adjustable

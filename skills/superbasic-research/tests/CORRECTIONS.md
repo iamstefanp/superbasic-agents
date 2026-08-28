@@ -340,3 +340,60 @@ fabricated citation. **This is a reproducibility gap, not a presentation
 one:** a source retrieved by a non-default method should say so in the
 citation, so a verifying reader knows a plain fetch won't reproduce it.
 Not yet fixed in `sbr.py` — flagged for the next correction pass.
+
+---
+
+### 2026-08-28 — M-T1 reopened: the "accepted as inherent property" close-out did not apply the card's own rule
+
+**Bin: D (test ambiguous) for the overlap-metric gap; the sbr.py PLAN/INTEL
+fix from the earlier 2026-08-28 M-T1 entry stands on its own merits and is
+not reversed by this entry.**
+
+An independent adversarial judge, grading M-T1 fresh with no memory of the
+earlier close-out reasoning, was asked to recompute the CONFIRMED-set
+overlap directly from the three run transcripts rather than trust this
+log's prose summary. Result: **all three pairwise comparisons — run1-vs-
+run2, run3-vs-run1, run3-vs-run2 — fail BATTERY.md's own ≥80% overlap
+rule**, both before and after the PLAN/INTEL fix (run1-vs-run2 ≈17–29%;
+the two post-fix comparisons ≈33–60%, never clearing even the 60% AMBER
+floor).
+
+The earlier close-out was not dishonest — the two specific claims it
+cited (registration mechanism and the §43 LuftVG mandatory-insurance
+basis reaching unanimous CONFIRMED across all three runs; the headline
+claim improving 1-of-2 → 2-of-3 CONFIRMED) are independently re-verified
+true by this judge, including two live web spot-checks. But citing those
+two facts and closing the card is not the same as the card passing its
+own defined metric, and the write-up should not have implied the two are
+equivalent. **Status: M-T1 reopens as an unresolved card, not a resolved
+one.** No new sbr.py change is proposed by this entry alone — the honesty
+layer held throughout (no fabrication, no CONFIRMED-vs-contradicted flip)
+— but the card cannot be marked passed until either (a) a fourth run
+clears 80% against the corrected method, or (b) the council revisits
+whether 80% is the right bar for a genuinely scattered-statute subject.
+
+**Separate, smaller finding from the same grading pass:** BATTERY.md's
+overlap rule ("≥80% overlap in substance") has no defined denominator.
+Two good-faith graders computing "in good faith" landed on numbers as
+different as 17% and 60% for the same run pair, depending only on
+whether overlap is measured against the union or the smaller of the two
+CONFIRMED sets. **Proposed fix (bin D, test-definition only, not a
+method change):** define overlap in BATTERY.md as intersection over the
+smaller CONFIRMED set, matching how RUBRIC.md's other percentage-based
+gates (LIKELY hit rate, CONFIRMED precision) are already worded. Not yet
+applied — needs the same fresh-session ratification as every other entry
+in this log.
+
+**Third, independent finding, unrelated to the overlap question:** the
+750,000 SDR minimum-insurance figure that runs 1 and 3 both filed as
+unlocated/UNKNOWN turned up in an ordinary web search within a few
+queries during grading — a plausible **findable UNKNOWN** per RUBRIC.md's
+calibration standard (costs more than a wrong-but-chain-shown ESTIMATED).
+Worth a closer look at why `sbr.py`'s search strategy missed it twice
+before treating this as closed.
+
+**Ratified by:** not yet — pending fresh-session read-back, same as the
+other 2026-08-28 entries in this log.
+
+Full reasoning and the judge's independent claim-by-claim recount:
+`FINDINGS-MEMO.md`, 2026-08-28.
