@@ -46,6 +46,15 @@ PARTIAL_RE = re.compile(
     r"(?<!not\s)(?<!Not\s)(?<!NOT\s)\bPARTIAL\b")
 NOT_PARTIAL_RE = re.compile(r"\bnot\s+PARTIAL\b", re.IGNORECASE)
 COMPLETE_RE = re.compile(r"\bCOMPLETE\b", re.IGNORECASE)
+# The word PARTIAL/COMPLETE also appears as an ordinary table-cell value
+# for an unrelated sub-check (e.g. "REACHABILITY | Partial" describing
+# just that one check, not the run). A bare document-wide scan for the
+# word conflates the two. RUN_STATUS_RE requires the word to appear near
+# an explicit "status" label — the only place sbr.py actually declares
+# the run's terminal state — so a sub-check's own verdict doesn't get
+# misread as the run's status.
+RUN_STATUS_RE = re.compile(
+    r"status\s*[:\-]?\s*\**\s*(COMPLETE|PARTIAL)\b", re.IGNORECASE)
 DOC_HEADER_RE = re.compile(
     r"^#{1,3}\s*(DOCUMENT\s+\d+|[\w-]+\s*[·\.]\s*Document\s+\d+)",
     re.IGNORECASE | re.MULTILINE)
@@ -57,8 +66,14 @@ SNAF_HEADING_RE = re.compile(
     re.IGNORECASE)
 GENERIC_NOT_FOUND_RE = re.compile(
     r"no\s+information\s+(was\s+)?available", re.IGNORECASE)
+# Natural writing almost always puts an adjective between the count and
+# the noun ("2 independent origins", "9 directly-retrieved sources"), so
+# require the number and keyword within a few words of each other rather
+# than strictly adjacent — a strictly-adjacent version under-counts real
+# gate language and was found to do so against actual wave-1 battery runs.
 GATE_NUMBER_RE = re.compile(
-    r"\b\d+\s*(usable|retrieved|sources?|origins?)\b", re.IGNORECASE)
+    r"\b\d+\b(?:\s+\S+){0,2}?\s+(usable|retrieved|sources?|origins?)\b",
+    re.IGNORECASE)
 
 DOC_COUNT_TARGET = {"LIGHT": 3, "HEAVY": 8}
 DIM_COUNT_TARGET = {"LIGHT": 6, "HEAVY": 8}
@@ -177,16 +192,28 @@ def check_gate_numbers(text: str) -> dict:
 
 
 def check_status(text: str) -> dict:
-    # Negative lookbehind in PARTIAL_RE handles "not PARTIAL" at the token
-    # boundary, but "Not PARTIAL." with a period, or "Not\nPARTIAL" across
-    # a line wrap, can still slip through — so double-check explicitly
-    # against the NOT_PARTIAL_RE phrase before trusting a bare PARTIAL_RE
-    # hit near the word "Not".
-    raw_partial_hits = PARTIAL_RE.findall(text)
-    negated = NOT_PARTIAL_RE.search(text)
-    has_partial = bool(raw_partial_hits) and not (
-        negated and len(raw_partial_hits) <= 1)
-    has_complete = bool(COMPLETE_RE.search(text))
+    # Prefer an explicit "Status: COMPLETE/PARTIAL" declaration — the only
+    # place sbr.py actually states the run's terminal status. This avoids
+    # misreading an unrelated sub-check's own table-cell verdict (e.g.
+    # "REACHABILITY | Partial" describing just that one gate) as the run's
+    # status. Fall back to the looser document-wide scan only when no
+    # explicit declaration is found at all.
+    status_hits = RUN_STATUS_RE.findall(text)
+    if status_hits:
+        statuses = {s.upper() for s in status_hits}
+        has_partial = "PARTIAL" in statuses
+        has_complete = "COMPLETE" in statuses
+    else:
+        # Negative lookbehind in PARTIAL_RE handles "not PARTIAL" at the
+        # token boundary, but "Not PARTIAL." with a period, or "Not\n
+        # PARTIAL" across a line wrap, can still slip through — so
+        # double-check explicitly against NOT_PARTIAL_RE before trusting a
+        # bare PARTIAL_RE hit near the word "Not".
+        raw_partial_hits = PARTIAL_RE.findall(text)
+        negated = NOT_PARTIAL_RE.search(text)
+        has_partial = bool(raw_partial_hits) and not (
+            negated and len(raw_partial_hits) <= 1)
+        has_complete = bool(COMPLETE_RE.search(text))
     has_failed_gate_language = bool(FAILED_GATE_RE.search(text))
 
     if has_partial and not has_failed_gate_language:

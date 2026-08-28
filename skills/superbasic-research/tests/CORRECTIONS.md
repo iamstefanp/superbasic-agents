@@ -87,3 +87,46 @@ demonstrated fact, until it's actually re-run).
   every gate on the first try. Not a bug; a coverage gap in this run.
   V-T3 (wave 2) is specifically designed to force a loop and will be the
   real test of this surface.
+
+## 2026-08-28 — Two check_run.py fixes found during wave 1 grading
+
+**Forced by:** grading wave 1 (V-T1, V-T4, F-T1, F-T4, M-T1×2), specifically
+M-T1's second replication run.
+**Bin:** B (checker bug — this is test infrastructure, not `sbr.py`, but the
+same discipline applies: the tool that grades the method must itself be
+correct, and corrections to it are logged the same way).
+
+**Fix 1 — status detector false-positive.** `check_status()` scanned the
+whole document for the bare word PARTIAL to decide the run's terminal
+status. M-T1-run2's own VERIFY gate table legitimately used "Partial" as
+one sub-check's verdict (`REACHABILITY — cited sources actually retrieved |
+**Partial**`, describing only that check, not the run) — the checker
+misread it as an ambiguous run-level status. Verified against the actual
+unedited agent output, not a summary. Fixed: `check_status()` now looks
+first for an explicit `"Status: COMPLETE/PARTIAL"` declaration (the only
+place `sbr.py` actually states the run's terminal status) and only falls
+back to the looser whole-document scan when no such declaration exists.
+
+**Fix 2 — gate-number regex under-counted real language.** `GATE_NUMBER_RE`
+required the count and the keyword adjacent (`\d+\s*sources?`). Real writing
+almost never does that — "2 **independent** origins", "9 **directly-
+retrieved** sources" — so the check was failing on documents that plainly
+stated their gate counts, just with an adjective in between. Loosened to
+allow up to two words between the number and the keyword.
+
+**Which purpose it serves:** the checker exists to verify gate results are
+recorded as real numbers, not vibes (RUBRIC.md Layer 1). A checker that
+can't recognize a number because of ordinary English word order fails at
+that job regardless of what the underlying run actually did — this was
+producing false FAILs, not false PASSes, so it never let a bad run through,
+but it would have wasted grading time chasing phantom findings.
+**Falsifiable prediction:** re-running `check_run.py` against all four
+prior known-good outputs (2 stranger tests + M-T1 run 1 + run 2) after
+both fixes shows 6/6 on all four, with no new false positives introduced.
+**Ratified by:** not yet — same open item as the 2026-08-28 DIVERSITY fix
+above; both are now pending a fresh-session read-back together.
+**Regression re-run:** done immediately, in the same session — both
+pre-battery stranger-test outputs re-checked (6/6, unchanged) and all six
+wave-1 outputs re-checked (6/6 across the board, up from 4/6 and 5/6 on
+the two M-T1 runs pre-fix). Documented here as a claim I made and then
+immediately verified, not a claim awaiting later confirmation.
