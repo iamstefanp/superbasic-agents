@@ -25,7 +25,7 @@ itself a Reach Honesty violation.
 
 | Domain / service | Observed behavior | Source |
 |---|---|---|
-| `eur-lex.europa.eu` | Both URL forms (`OJ:L_...` and `ELI` forms) returned empty content to WebFetch, four attempts across two sessions | stranger test A; V-T2 key-building |
+| `eur-lex.europa.eu` | **WebFetch fails consistently — empty content, all URL forms, 4+ attempts across 3 sessions (stranger test A, V-T2 key-building, V-T2 battery run). The Browser tool (`mcp__Claude_Browser`) succeeds** — V-T2's battery run retrieved both Regulation (EU) 2024/1689 and the amending 2026/1744 in full via the browser's rendered DOM, reading the actual text rather than a summary. EUR-Lex appears to require a rendered browser context; WebFetch's HTML→markdown conversion gets nothing. **Fix for future runs: if WebFetch fails on eur-lex.europa.eu, retry via the Browser tool before giving up — this is a demonstrated working route, not a hypothetical one.** | stranger test A; V-T2 key-building; V-T2 battery run (resolved) |
 | `reuters.com` | Blocked to this runtime's user agent | stranger test A |
 | `apnews.com` | Blocked | stranger test A |
 | `ft.com` | Blocked | stranger test A |

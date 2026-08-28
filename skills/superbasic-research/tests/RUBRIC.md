@@ -26,6 +26,14 @@ produce.
   failed gate not honored (proceeding as if it passed).
 - **PARTIAL bluffed** — loops exhausted, gate still failing, and the
   Report does not say PARTIAL at the top.
+  **Known gap (found grading F-T2, 2026-08-28):** as worded this only
+  catches over-claiming — a failing run hiding behind COMPLETE. It has
+  no clause for the reverse: a run that passes every gate cleanly but
+  downgrades itself to PARTIAL anyway. That direction currently has to
+  be caught in Layer 2 judgment, not here, which is inconsistent with
+  treating status accuracy as gate-worthy at all. Not yet resolved —
+  see CORRECTIONS.md 2026-08-28 (F-T2 entry). Judges should flag both
+  directions until this gate is reworded.
 - **Reader gates (M-T2 only)** — the cold reader cannot state the
   answer, cannot name two real not-knowns, cannot retrace one CONFIRMED
   claim to its source in the two-minute window, or answers "would you
