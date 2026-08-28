@@ -304,9 +304,39 @@ the audit layer belongs in the same document at all.
 
 **Ratified by:** not yet — same pending fresh-session read-back as the
 other 2026-08-28 entries in this log.
-**Regression re-run:** pending — the next HEAVY or LIGHT card run should
-produce a Part One/Part Two report and be checked against `check_run.py`
-(the status detector and document-count checks were verified to still
-work against the new structure without needing their own changes — the
-split is internal to one document, not a new document) and, ideally, a
-third cold-reader pass to test the falsifiable prediction above.
+
+**Regression re-run: DONE, and the prediction FAILED.** V-T2's run (the
+first LIGHT/HEAVY execution under the split format, produced with no
+knowledge of the two prior cold-reader tests) was put through a third,
+independent cold-reader pass. **Q5 fired again, unprompted, naming the
+same apparatus:** *"the whole apparatus of Claim Table / Hypothesis
+Final State / Confidence Summary / Bands / Personas reads like it's
+satisfying an internal audit checklist more than answering my
+question... it adds the appearance of rigor"* — not the substance, per
+this reader. Splitting Part One from Part Two did not remove the
+friction. It produced a clean answer *first*, but Part Two still sits in
+the same document a real reader reads straight through, and the reader
+still flagged it.
+
+**Per the prediction's own stated consequence: the next move is not a
+fourth patch to REPORT's internal layout.** Three independent readers
+have now named the same thing across two different formats. The real
+open question — genuinely unresolved, not mine to decide alone — is
+whether the audit layer (claim table, bands, personas, tally) belongs in
+the same document a reader receives at all, versus being a separate
+artifact (a linked appendix, a machine-readable sidecar) that the method
+still requires for grading and reproducibility but that a reader is
+never handed by default.
+
+**Second finding from the same test, distinct and arguably more
+consequential:** the cold reader independently tried to verify V-T2's
+own cited EUR-Lex source with a plain fetch and got empty content — the
+exact WebFetch-fails-on-EUR-Lex problem now in `capability-ledger.md`.
+The run itself retrieved that text successfully, but via the Browser
+tool, not WebFetch — and the citation doesn't say that. A reader trying
+to independently verify a "GOLD, retrieved" source with an ordinary tool
+hits a wall and cannot tell whether that's their own tooling or a
+fabricated citation. **This is a reproducibility gap, not a presentation
+one:** a source retrieved by a non-default method should say so in the
+citation, so a verifying reader knows a plain fetch won't reproduce it.
+Not yet fixed in `sbr.py` — flagged for the next correction pass.
