@@ -3,7 +3,7 @@
 The Researcher's reference layer lives with the method it serves, in its
 own repo — [github.com/iamstefanp/superbasic-research](https://github.com/iamstefanp/superbasic-research):
 
-    references/
+    standards/
 
     decay-classes.md      how old is too old, by subject tempo
     media-index.md        98 source types, Paid / Owned / Earned

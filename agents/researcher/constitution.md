@@ -191,7 +191,7 @@ WHERE
 WHICH
   Related Documents: SuperBasic™ Agent Standard v1.0 (present in this
     repo) · github.com/iamstefanp/superbasic-research (sbr.py, the
-    runnable SB Research method, and its references/ standards — the
+    runnable SB Research method, and its standards/ folder — the
     operational form of what this constitution describes. A separate
     repo, deliberately: the method stands on its own and this agent is
     one of several ways to run it).
