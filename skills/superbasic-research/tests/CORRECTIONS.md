@@ -183,5 +183,35 @@ the EU regulation text directly, rather than a subset.
 
 **Ratified by:** not yet — third item pending the same fresh-session
 read-back as the two prior 2026-08-28 entries.
-**Regression re-run:** pending — a third M-T1 execution is being run now
-specifically to test this prediction.
+**Regression re-run:** DONE — third M-T1 execution complete, diffed
+against both prior runs. Result: **partial confirmation of the
+prediction, and the honest shape of "partial" is itself the finding.**
+
+Two structural facts now survive all three independent blind runs
+unanimously CONFIRMED: the registration mechanism and the mandatory-
+insurance basis. The headline claim ("commercial has no separate legal
+track") moved from 1-of-2 CONFIRMED to 2-of-3. Run 3 also surfaced a new,
+more precise finding neither prior run reached (§43 LuftVG delegates its
+minimum-coverage figure to an unlocated ordinance) — directly because the
+canonical check made it open the statute first rather than default to
+trade-press synthesis.
+
+What did NOT converge: second-tier facts (geo-zone detail, exact fines,
+the precise insurance figure, exact altitude/authorization specifics).
+Every run still lands on a *different* specific statute section for
+these — run 1 found §21h/§44 LuftVO in depth, run 2 found §37 LuftVG, run
+3 found neither and instead found the §43-delegation fact. The fix
+increased canonical-retrieval *behavior* (every run now tries the primary
+text first, visibly) but German drone law is scattered across enough
+sibling provisions that "try for a canonical source per cluster" does not
+guarantee two agents try for the *same* one.
+
+**Decision (Stefan, 2026-08-28): accept this as an inherent property of
+open research on a scattered-statute subject, not a further method gap.**
+Two lawyers independently researching the same question would also cite
+different sections. No further correction attempted. Core claims
+reproduce reliably; second-tier specifics legitimately vary by what an
+honest, thorough search happens to surface first — that is what LIGHT
+mode's source floor is for, not a defect to keep chasing. Logged as a
+documented property of the method for the Findings Memo, not carried
+forward as an open action item.
